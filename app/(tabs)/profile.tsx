@@ -1,7 +1,33 @@
-import { Text, View, ScrollView, TouchableOpacity, Image } from "react-native";
+import { Text, View, ScrollView, TouchableOpacity, Image, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useAuth } from "../../contexts/AuthContext";
+import { router } from "expo-router";
 
 export default function ProfilePage() {
+  const { user, logout } = useAuth();
+
+  const handleLogout = async () => {
+    Alert.alert(
+      "Logout",
+      "Are you sure you want to logout?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Logout",
+          style: "destructive",
+          onPress: async () => {
+            try {
+              await logout();
+              router.replace("/login");
+            } catch (error) {
+              Alert.alert("Error", "Failed to logout");
+            }
+          },
+        },
+      ]
+    );
+  };
+
   const userStats = [
     { label: "Workouts", value: "24", icon: "fitness" as const },
     { label: "Streak", value: "7 days", icon: "flame" as const },
@@ -132,7 +158,7 @@ export default function ProfilePage() {
         </View>
 
         {/* Logout Button */}
-        <TouchableOpacity className="bg-red-600 p-4 rounded-xl mt-8">
+        <TouchableOpacity className="bg-red-600 p-4 rounded-xl mt-8" onPress={handleLogout}>
           <View className="flex-row items-center justify-center">
             <Ionicons name="log-out" size={24} color="white" />
             <Text className="text-white text-lg font-semibold ml-2">
