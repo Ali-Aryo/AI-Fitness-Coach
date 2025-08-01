@@ -1,8 +1,7 @@
-import { useEffect } from "react";
-import { View, Text, ActivityIndicator, TouchableOpacity } from "react-native";
-import { useAuth } from "../contexts/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useEffect } from "react";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import { useAuth } from "../contexts/AuthContext";
 // @ts-ignore
 import { Link, router } from "expo-router";
 
@@ -42,7 +41,7 @@ export default function Index() {
     );
   }
 
-  // Show welcome screen with login/signup options
+  // Show welcome screen with login/start options
   return (
     <View className="flex-1 bg-slate-900 justify-center px-6">
       {/* Header */}
@@ -60,23 +59,23 @@ export default function Index() {
 
       {/* Action Buttons */}
       <View className="space-y-4">
-        <Link href="/login" asChild>
+        <Link href="/onboarding" asChild>
           <TouchableOpacity className="bg-blue-600 p-4 rounded-xl">
             <View className="flex-row items-center justify-center">
-              <Ionicons name="log-in" size={24} color="white" />
+              <Ionicons name="play" size={24} color="white" />
               <Text className="text-white text-lg font-semibold ml-2">
-                Sign In
+                Start
               </Text>
             </View>
           </TouchableOpacity>
         </Link>
 
-        <Link href="/signup" asChild>
+        <Link href="/login" asChild>
           <TouchableOpacity className="bg-slate-800 p-4 rounded-xl border border-slate-700">
             <View className="flex-row items-center justify-center">
-              <Ionicons name="person-add" size={24} color="white" />
+              <Ionicons name="log-in" size={24} color="white" />
               <Text className="text-white text-lg font-semibold ml-2">
-                Create Account
+                Sign In
               </Text>
             </View>
           </TouchableOpacity>

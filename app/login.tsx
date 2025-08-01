@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView, Platform } from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useAuth } from '../contexts/AuthContext';
 //@ts-ignore
-import { Link, router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+//@ts-ignore
+import { router } from 'expo-router';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -33,6 +34,13 @@ export default function LoginScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       className="flex-1 bg-slate-900"
     >
+      {/* Back Arrow */}
+      <View className="pt-12 px-6">
+        <TouchableOpacity onPress={() => router.back()} className="w-10 h-10 items-center justify-center">
+          <Ionicons name="arrow-back" size={24} color="white" />
+        </TouchableOpacity>
+      </View>
+
       <View className="flex-1 justify-center px-6">
         {/* Header */}
         <View className="items-center mb-12">
@@ -83,16 +91,6 @@ export default function LoginScreen() {
               {loading ? 'Signing In...' : 'Sign In'}
             </Text>
           </TouchableOpacity>
-        </View>
-
-        {/* Sign Up Link */}
-        <View className="flex-row justify-center mt-8">
-          <Text className="text-slate-400">Don't have an account? </Text>
-          <Link href="/signup" asChild>
-            <TouchableOpacity>
-              <Text className="text-blue-500 font-semibold">Sign Up</Text>
-            </TouchableOpacity>
-          </Link>
         </View>
       </View>
     </KeyboardAvoidingView>

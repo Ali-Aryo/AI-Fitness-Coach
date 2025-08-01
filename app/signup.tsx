@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView, Platform } from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useAuth } from '../contexts/AuthContext';
 //@ts-ignore
-import { Link, router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+//@ts-ignore
+import { router } from 'expo-router';
 
 export default function SignupScreen() {
   const [email, setEmail] = useState('');
@@ -31,7 +32,8 @@ export default function SignupScreen() {
     setLoading(true);
     try {
       await signUp(email, password);
-      router.replace('/(tabs)');
+      // Redirect to onboarding instead of tabs
+      router.replace('/onboarding');
     } catch (error: any) {
       Alert.alert('Signup Failed', error.message);
     } finally {
@@ -44,6 +46,13 @@ export default function SignupScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       className="flex-1 bg-slate-900"
     >
+      {/* Back Arrow */}
+      <View className="pt-12 px-6">
+        <TouchableOpacity onPress={() => router.push('/onboarding')} className="w-10 h-10 items-center justify-center">
+          <Ionicons name="arrow-back" size={24} color="white" />
+        </TouchableOpacity>
+      </View>
+
       <View className="flex-1 justify-center px-6">
         {/* Header */}
         <View className="items-center mb-12">
@@ -106,16 +115,6 @@ export default function SignupScreen() {
               {loading ? 'Creating Account...' : 'Create Account'}
             </Text>
           </TouchableOpacity>
-        </View>
-
-        {/* Sign In Link */}
-        <View className="flex-row justify-center mt-8">
-          <Text className="text-slate-400">Already have an account? </Text>
-          <Link href="/login" asChild>
-            <TouchableOpacity>
-              <Text className="text-blue-500 font-semibold">Sign In</Text>
-            </TouchableOpacity>
-          </Link>
         </View>
       </View>
     </KeyboardAvoidingView>
