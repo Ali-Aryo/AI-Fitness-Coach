@@ -5,6 +5,7 @@ import type { OnboardingData } from '../../app/onboarding';
 
 interface Step3Props {
   onNext: (data: Partial<OnboardingData>) => void;
+  onBack: () => void;
   data: OnboardingData;
 }
 
@@ -30,7 +31,7 @@ const locationEquipmentMap = {
   'custom': []
 };
 
-export default function Step3({ onNext, data }: Step3Props) {
+export default function Step3({ onNext, onBack, data }: Step3Props) {
   const [selectedEquipment, setSelectedEquipment] = useState<string[]>(data.equipment || []);
 
   // Auto-fill equipment based on location
@@ -64,6 +65,15 @@ export default function Step3({ onNext, data }: Step3Props) {
 
   return (
     <View className="flex-1 py-8">
+      {/* Back Button */}
+      <TouchableOpacity
+        onPress={onBack}
+        className="flex-row items-center mb-6"
+      >
+        <Ionicons name="arrow-back" size={24} color="#3b82f6" />
+        <Text className="text-blue-500 text-lg ml-2">Back</Text>
+      </TouchableOpacity>
+
       {/* Header */}
       <View className="mb-8">
         <Text className="text-3xl font-bold text-white mb-4">

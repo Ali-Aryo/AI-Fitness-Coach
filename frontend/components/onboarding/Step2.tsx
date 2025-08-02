@@ -5,6 +5,7 @@ import type { OnboardingData } from '../../app/onboarding';
 
 interface Step2Props {
   onNext: (data: Partial<OnboardingData>) => void;
+  onBack: () => void;
   data: OnboardingData;
 }
 
@@ -46,7 +47,7 @@ const locations = [
   }
 ];
 
-export default function Step2({ onNext, data }: Step2Props) {
+export default function Step2({ onNext, onBack, data }: Step2Props) {
   const [selectedLocation, setSelectedLocation] = useState(data.location || '');
 
   const handleContinue = () => {
@@ -57,6 +58,15 @@ export default function Step2({ onNext, data }: Step2Props) {
 
   return (
     <View className="flex-1 py-8">
+      {/* Back Button */}
+      <TouchableOpacity
+        onPress={onBack}
+        className="flex-row items-center mb-6"
+      >
+        <Ionicons name="arrow-back" size={24} color="#3b82f6" />
+        <Text className="text-blue-500 text-lg ml-2">Back</Text>
+      </TouchableOpacity>
+
       {/* Header */}
       <View className="mb-8">
         <Text className="text-3xl font-bold text-white mb-4">

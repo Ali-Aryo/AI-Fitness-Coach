@@ -5,6 +5,7 @@ import type { OnboardingData } from '../../app/onboarding';
 
 interface Step4Props {
   onNext: (data: Partial<OnboardingData>) => void;
+  onBack: () => void;
   data: OnboardingData;
 }
 
@@ -14,7 +15,7 @@ const experienceLevels = [
   { id: 'advanced', title: 'Advanced', description: 'Experienced with consistent training', color: 'bg-red-600' }
 ];
 
-export default function Step4({ onNext, data }: Step4Props) {
+export default function Step4({ onNext, onBack, data }: Step4Props) {
   const [experience, setExperience] = useState(data.experience || '');
   const [hasStructuredPlan, setHasStructuredPlan] = useState<boolean | undefined>(data.hasStructuredPlan);
 
@@ -26,6 +27,15 @@ export default function Step4({ onNext, data }: Step4Props) {
 
   return (
     <View className="flex-1 py-8">
+      {/* Back Button */}
+      <TouchableOpacity
+        onPress={onBack}
+        className="flex-row items-center mb-6"
+      >
+        <Ionicons name="arrow-back" size={24} color="#3b82f6" />
+        <Text className="text-blue-500 text-lg ml-2">Back</Text>
+      </TouchableOpacity>
+
       {/* Header */}
       <View className="mb-8">
         <Text className="text-3xl font-bold text-white mb-4">

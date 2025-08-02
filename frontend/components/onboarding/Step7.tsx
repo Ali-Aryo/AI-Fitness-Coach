@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import type { OnboardingData } from '../../app/onboarding';
 
 interface Step7Props {
   onNext: (data: Partial<OnboardingData>) => void;
+  onBack: () => void;
   data: OnboardingData;
 }
 
-export default function Step7({ onNext, data }: Step7Props) {
+export default function Step7({ onNext, onBack, data }: Step7Props) {
   const [hasInjuries, setHasInjuries] = useState<boolean | undefined>(undefined);
   const [injuries, setInjuries] = useState(data.injuries || '');
   const [hasMedicalConditions, setHasMedicalConditions] = useState<boolean | undefined>(undefined);
@@ -22,6 +24,15 @@ export default function Step7({ onNext, data }: Step7Props) {
 
   return (
     <ScrollView className="flex-1 py-8">
+      {/* Back Button */}
+      <TouchableOpacity
+        onPress={onBack}
+        className="flex-row items-center mb-6"
+      >
+        <Ionicons name="arrow-back" size={24} color="#3b82f6" />
+        <Text className="text-blue-500 text-lg ml-2">Back</Text>
+      </TouchableOpacity>
+
       {/* Header */}
       <View className="mb-8">
         <Text className="text-3xl font-bold text-white mb-4">

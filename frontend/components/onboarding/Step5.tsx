@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import type { OnboardingData } from '../../app/onboarding';
 
 interface Step5Props {
   onNext: (data: Partial<OnboardingData>) => void;
+  onBack: () => void;
   data: OnboardingData;
 }
 
 const genders = ['Male', 'Female', 'Other', 'Prefer not to say'];
 
-export default function Step5({ onNext, data }: Step5Props) {
+export default function Step5({ onNext, onBack, data }: Step5Props) {
   const [age, setAge] = useState(data.age?.toString() || '');
   const [gender, setGender] = useState(data.gender || '');
   const [heightFeet, setHeightFeet] = useState('');
@@ -40,6 +42,15 @@ export default function Step5({ onNext, data }: Step5Props) {
 
   return (
     <ScrollView className="flex-1 py-8">
+      {/* Back Button */}
+      <TouchableOpacity
+        onPress={onBack}
+        className="flex-row items-center mb-6"
+      >
+        <Ionicons name="arrow-back" size={24} color="#3b82f6" />
+        <Text className="text-blue-500 text-lg ml-2">Back</Text>
+      </TouchableOpacity>
+
       {/* Header */}
       <View className="mb-8">
         <Text className="text-3xl font-bold text-white mb-4">

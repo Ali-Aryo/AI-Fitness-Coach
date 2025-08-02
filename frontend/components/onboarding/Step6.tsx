@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import type { OnboardingData } from '../../app/onboarding';
 
 interface Step6Props {
   onNext: (data: Partial<OnboardingData>) => void;
+  onBack: () => void;
   data: OnboardingData;
 }
 
 const sessionLengths = [15, 30, 45, 60, 90];
 const preferredTimes = ['Morning', 'Afternoon', 'Evening', 'No preference'];
 
-export default function Step6({ onNext, data }: Step6Props) {
+export default function Step6({ onNext, onBack, data }: Step6Props) {
   const [daysPerWeek, setDaysPerWeek] = useState(data.daysPerWeek || 3);
   const [sessionLength, setSessionLength] = useState(data.sessionLength || 45);
   const [preferredTime, setPreferredTime] = useState(data.preferredTime || '');
@@ -23,6 +25,15 @@ export default function Step6({ onNext, data }: Step6Props) {
 
   return (
     <ScrollView className="flex-1 py-8">
+      {/* Back Button */}
+      <TouchableOpacity
+        onPress={onBack}
+        className="flex-row items-center mb-6"
+      >
+        <Ionicons name="arrow-back" size={24} color="#3b82f6" />
+        <Text className="text-blue-500 text-lg ml-2">Back</Text>
+      </TouchableOpacity>
+
       {/* Header */}
       <View className="mb-8">
         <Text className="text-3xl font-bold text-white mb-4">

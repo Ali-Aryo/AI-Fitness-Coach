@@ -21,7 +21,8 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Workout",
-          tabBarIcon: ({ color, size }) => (
+          headerShown: false,
+          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
             <Ionicons name="fitness" size={size} color={color} />
           ),
         }}
@@ -30,8 +31,19 @@ export default function TabLayout() {
         name="schedule"
         options={{
           title: "Schedule",
-          tabBarIcon: ({ color, size }) => (
+          headerShown: false,
+          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
             <Ionicons name="calendar" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="coach"
+        options={{
+          title: "Coach",
+          headerShown: false,
+          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+            <Ionicons name="chatbubble-ellipses" size={size} color={color} />
           ),
         }}
       />
@@ -39,11 +51,12 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: "Profile",
-          tabBarIcon: ({ color, size }) => (
+          headerShown: false,
+          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
             <Ionicons name="person" size={size} color={color} />
           ),
         }}
       />
     </Tabs>
   );
-} 
+}
