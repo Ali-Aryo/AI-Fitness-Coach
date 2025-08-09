@@ -57,6 +57,13 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="analyze"
+        options={{
+          title: "Analyze",
+          headerShown: false,
+        }}
+      />
     </Tabs>
   );
 }
