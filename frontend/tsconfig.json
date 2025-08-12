@@ -2,6 +2,9 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react-jsx",
     "paths": {
       "@/*": [
         "./*"
@@ -14,6 +17,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "app.d.ts",
     "frontend/.expo/types/**/*.ts",
     "expo-env.d.ts",
     "nativewind-env.d.ts",
